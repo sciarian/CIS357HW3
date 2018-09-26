@@ -16,10 +16,8 @@ class SettingsViewController: UIViewController {
 
     
     //Labels and picker
-    @IBOutlet weak var fromUnits: UILabel!
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var toLabel: UILabel!
-    @IBOutlet weak var toUnits: UILabel!
     @IBOutlet weak var picker: UIPickerView!
     
     //Picker properties
@@ -29,8 +27,8 @@ class SettingsViewController: UIViewController {
     
     //Regular variables
     var mode: Bool?//Unit mode True = length, False = volume
-    var toText: String?
-    var fromText: String?
+    var toUnits: String?
+    var fromUnits: String?
     var save: Bool?
     
     
@@ -45,11 +43,11 @@ class SettingsViewController: UIViewController {
         self.toLabel.addGestureRecognizer(tapToLabelGesture)
     
         //SET UP LABEL TEXT
-        self.fromUnits.text = self.fromText
-        self.toUnits.text   = self.toText
+        self.fromLabel.text = "From Units: \(self.fromUnits!)"
+        self.toLabel.text   = "To Units: \(self.toUnits!)"
         
         
-        //SET UP PICKERDATA
+        //SET UP PICKER DATA
         if let mode_val = self.mode{
             if mode_val{
                 self.pickerData = ["Yards","Meters","Miles"]
@@ -90,7 +88,7 @@ class SettingsViewController: UIViewController {
        if(self.save!){
             print("Saving changes")
             if let d = self.delegate {
-                d.unitsSelected(from: self.fromUnits.text!, to: self.toUnits.text!)
+                d.unitsSelected(from: self.fromUnits!, to: self.toUnits!)
             }
         }else{
             print("Exit without saving")
@@ -153,9 +151,11 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     //When I select something what did I select
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if(self.whichLabel!){
-            self.fromUnits.text = self.pickerData[row]
+            self.fromUnits = self.pickerData[row]
+            self.fromLabel.text = "From Units \(self.fromUnits!)"
         }else{
-            self.toUnits.text = self.pickerData[row]
+            self.toUnits = self.pickerData[row]
+            self.toLabel.text = "To Units \(self.toUnits!)"
         }
     }
 }

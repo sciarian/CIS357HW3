@@ -128,10 +128,12 @@ class CalculatorViewController: UIViewController, SettingsViewControllerDelegate
     @IBAction func modePressed(_ sender: UIButton) {
         //If we are in length switch to volume
         if self.fromLabel.text! == lengthFromUnit {
+            self.conversionLabel.text = "Volume Conversion Calculator"
             self.fromLabel.text = self.volumeFromUnit
             self.toLabel.text   = self.volumeToUnit
         }//Otherwise switch to length
         else{
+            self.conversionLabel.text = "Length Conversion Calculator"
             self.fromLabel.text = self.lengthFromUnit
             self.toLabel.text   = self.lengthToUnit
         }
@@ -167,8 +169,8 @@ class CalculatorViewController: UIViewController, SettingsViewControllerDelegate
                 //Set up labels and delegate
                 print(self.toLabel.text!)
                 print(self.fromLabel.text!)
-                dest.toText         = self.toLabel.text!
-                dest.fromText       = self.fromLabel.text!
+                dest.toUnits         = self.toLabel.text!
+                dest.fromUnits       = self.fromLabel.text!
                 dest.delegate       = self
                 
                 //Set up mode
