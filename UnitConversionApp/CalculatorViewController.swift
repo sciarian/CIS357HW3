@@ -45,6 +45,9 @@ class CalculatorViewController: UIViewController, SettingsViewControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Set background color
+        self.view.backgroundColor = BACKGROUND_COLOR
+        
         // Do any additional setup after loading the view, typically from a nib.
         let detectTouch = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         self.view.addGestureRecognizer(detectTouch)
